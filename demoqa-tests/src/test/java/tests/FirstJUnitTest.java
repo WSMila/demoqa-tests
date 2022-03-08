@@ -1,4 +1,4 @@
-package junit;
+package tests;
 
 import com.codeborne.selenide.Selenide;
 import net.jodah.failsafe.internal.util.Assert;
