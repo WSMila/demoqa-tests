@@ -1,10 +1,9 @@
 package tests;
 
 import com.codeborne.selenide.Selenide;
-import net.jodah.failsafe.internal.util.Assert;
 import org.junit.jupiter.api.*;
 
-public class FirstJUnitTest {
+public class FirstJUnitTests {
 
     @BeforeAll
     static void beforeAll() {
