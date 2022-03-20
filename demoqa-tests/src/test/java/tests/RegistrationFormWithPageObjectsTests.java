@@ -12,6 +12,9 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class RegistrationFormWithPageObjectsTests {
 
+    RegistrationPage registrationPage = new RegistrationPage();
+    String firstName = "Yuriy";
+
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
@@ -20,12 +23,9 @@ public class RegistrationFormWithPageObjectsTests {
 
     @Test
     void successFillTest() {
-
-        open("/automation-practice-form");
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-
-        new RegistrationPage().setFirstName("Yuriy");
-        new RegistrationPage().setLastName("Gladkov");
+        registrationPage.openPage()
+                .setFirstName(firstName)
+                .setLastName("Gladkov");
         $("#userEmail").setValue("gladkov@ua.net");
         $("#genterWrapper").$(byText("Other")).click();
         $("#userNumber").setValue("+380963355447");
@@ -35,7 +35,7 @@ public class RegistrationFormWithPageObjectsTests {
         $("[aria-label$='June 12th, 1980']").click();
         $("#subjectsInput").setValue("Math").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("#uploadPicture").uploadFromClasspath("/home/wsmila/IdiaProjects/demoqa-tests/demoqa-tests/src/test/resources/1.jpg");
+        $("#uploadPicture").uploadFromClasspath("wsmila/1.jpg");
         $("#currentAddres").setValue("Some address 1");
         $("#state").scrollTo().click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
@@ -44,9 +44,9 @@ public class RegistrationFormWithPageObjectsTests {
         $("#submit").click();
 
         $("#example-model-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        new RegistrationPage().checkForm("Student Name", "Yuriy Gladkov");
-        new RegistrationPage().checkForm("Student Email", "gladkov@ua.net");
-        new RegistrationPage().checkForm("Gender", "Other");
+        registrationPage.checkForm("Student Name", firstName + "Gladkov")
+                .checkForm("Student Email", "gladkov@ua.net")
+                .checkForm("Gender", "Other");
 
     }
 
