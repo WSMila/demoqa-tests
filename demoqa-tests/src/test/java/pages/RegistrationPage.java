@@ -15,8 +15,6 @@ public class RegistrationPage {
             lastNameInput = $("#lastName"),
             resultsTable = $(".table-responsive");
 
-
-    // actions
     public RegistrationPage openPage() {
         open("/automation-practice-form");
         headerTitel.shouldHave(text("Student Registration Form"));
@@ -27,8 +25,9 @@ public class RegistrationPage {
         firstNameInput.setValue(firstName);
         return this;
     }
-    public void setLastName(String lastName){
+    public RegistrationPage setLastName(String lastName){
         lastNameInput.setValue(lastName);
+        return this;
     }
     public RegistrationPage checkForm(String fieldName, String value) {
         resultsTable.$(byText(fieldName))

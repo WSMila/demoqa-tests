@@ -14,6 +14,7 @@ public class RegistrationFormWithPageObjectsTests {
 
     RegistrationPage registrationPage = new RegistrationPage();
     String firstName = "Yuriy";
+    String lastName = "Gladkov";
 
     @BeforeAll
     static void beforeAll() {
@@ -25,26 +26,25 @@ public class RegistrationFormWithPageObjectsTests {
     void successFillTest() {
         registrationPage.openPage()
                 .setFirstName(firstName)
-                .setLastName("Gladkov");
+                .setLastName(lastName);
         $("#userEmail").setValue("gladkov@ua.net");
         $("#genterWrapper").$(byText("Other")).click();
-        $("#userNumber").setValue("+380963355447");
+        $("#userNumber").setValue("380963355447");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("June");
         $(".react-datepicker__year-select").selectOption("1980");
         $("[aria-label$='June 12th, 1980']").click();
         $("#subjectsInput").setValue("Math").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("#uploadPicture").uploadFromClasspath("wsmila/1.jpg");
-        $("#currentAddres").setValue("Some address 1");
+        $("#uploadPicture").uploadFromClasspath("img/1.png");
+        $("#currentAddress").setValue("Some address 1");
         $("#state").scrollTo().click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
         $("#city").click();
         $("#stateCity-wrapper").$(byText("Noida")).click();
         $("#submit").click();
-
-        $("#example-model-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        registrationPage.checkForm("Student Name", firstName + "Gladkov")
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        registrationPage.checkForm("Student Name", firstName + " " + lastName)
                 .checkForm("Student Email", "gladkov@ua.net")
                 .checkForm("Gender", "Other");
 
