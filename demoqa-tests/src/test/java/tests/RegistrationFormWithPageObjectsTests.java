@@ -30,10 +30,7 @@ public class RegistrationFormWithPageObjectsTests {
         $("#userEmail").setValue("gladkov@ua.net");
         $("#genterWrapper").$(byText("Other")).click();
         $("#userNumber").setValue("380963355447");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("June");
-        $(".react-datepicker__year-select").selectOption("1980");
-        $("[aria-label$='June 12th, 1980']").click();
+        registrationPage.setBirthDate("12", "June", "1980");
         $("#subjectsInput").setValue("Math").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("img/1.png");
